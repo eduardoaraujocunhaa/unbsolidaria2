@@ -81,8 +81,6 @@
 }
 
 .noticia, .pergunta, .trabalho{
-    min-height: 300px;
-    margin: 20px;
     padding: 10px;
 }
 

@@ -2007,17 +2007,17 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #ffffff;
-  background-color: #443e44;
-  border-color: #443e44;
+  background-color: #039BE5;
+  border-color: #039BE5;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  color: #ffffff;
-  background-color: #cad2c5;
-  border-color: #cad2c5;
+  color: #039BE5;
+  background-color: #ffffff;
+  border-color: #ffffff;
 }
 .btn-primary:active,
 .btn-primary.active,
