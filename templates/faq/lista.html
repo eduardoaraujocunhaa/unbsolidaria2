@@ -5,6 +5,8 @@
 
 <div class="container" role="listbox">
   <div id="perguntas" class="panel-group">
+    <h1>FAQ</h1>
+    <hr class="head-border-grey">
     {% for pergunta in perguntas %}
     <div class="row">
       <div class="content"> 
@@ -13,7 +15,7 @@
            <div class="panel panel-default">
             <div class="panel-heading">
             <h4 class="panel-title">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">{{pergunta.pergunta}}</a>
+              {{pergunta.pergunta}}
             </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse in">
