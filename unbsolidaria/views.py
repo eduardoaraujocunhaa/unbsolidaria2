@@ -64,7 +64,7 @@ class OrganizacaoFormView(View):
                 end_user = endereco.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
                 end_user.usuario_fk = user.id
                 end_user.save()
-
+	    email = user.email
             # returna objeto se esta tudo certo com as credenciais
             user = authenticate(username=username, password=password)
 
