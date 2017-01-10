@@ -81,8 +81,6 @@
 }
 
 .noticia, .pergunta, .trabalho{
-    min-height: 300px;
-    margin: 20px;
     padding: 10px;
 }
 
@@ -183,10 +181,11 @@
   }
 }
 
-#contact h1, #contact p{
+#contact h1, #contact p, #registro h1, #registro p, #perguntas h1{
     text-align: center;
     text-transform: uppercase;
     margin: 25px;
+    color: #3a506b;
 }
 
 .post-heading{

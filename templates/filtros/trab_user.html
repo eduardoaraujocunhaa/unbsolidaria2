@@ -2,30 +2,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div id="trabalho">
-<div class="container">
-    
-    
-    <form action="" method="get">
-        {{ filter.form.as_p }}
-        <input type="submit" />
-    </form>
+<div id="registro">
+    <div class="container">
+        <div class="row">
 
-    <table class="tabela_trabalho">
-      <tr>
-        <th>Organização que Oferta</th>
-        <th>Título do Trabalho</th>
-        <th>Voluntário</th>
-
-      </tr>
-        {% for obj in filter.qs %}
-      <tr>
-        <td>{{ obj.organizacao }}</td>
-        <td>{{ obj.trabalho }}</td>
-        <td>{{ obj.voluntario }}</td>
-        {% endfor %}
-    </table>
-</div>
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <h1>Relação Usuário - Trabalho</h1>
+                <hr class="head-border-grey">
+            </div>
+        
+            <form action="" method="get">
+                {{ filter.form.as_p }}
+                <input type="submit" />
+            </form>
+    
+            <table class="tabela_trabalho">
+                <tr>
+                    <th>Organização que Oferta</th>
+                    <th>Título do Trabalho</th>
+                    <th>Voluntário</th>
+                </tr>
+                {% for obj in filter.qs %}
+                <tr>
+                    <td>{{ obj.organizacao }}</td>
+                    <td>{{ obj.trabalho }}</td>
+                    <td>{{ obj.voluntario }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
