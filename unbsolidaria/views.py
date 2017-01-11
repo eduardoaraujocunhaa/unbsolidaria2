@@ -64,16 +64,6 @@ class OrganizacaoFormView(View):
 	                org_user.save()
 	                end_user.save()
 
-  	    if '@' in username:
-		try:
-                	username = user.email
-	        except ObjectDoesNotExist:
-        		raise ValidationError(
-        	            self.error_messages['invalid_login'],
-        	            code='invalid_login',
-        	            params={'username':self.username_field.verbose_name},
-        	        )
-
             # returna objeto se esta tudo certo com as credenciais
             user = authenticate(username=username, password=password)
 
@@ -124,15 +114,7 @@ class VoluntarioFormView(View):
 	                end_user.usuario_fk = user.id
 	                end_user.save()
         	        vol_user.save()
-  	    if '@' in username:
-		try:
-                	username = user.email
-	        except ObjectDoesNotExist:
-        		raise ValidationError(
-        	            self.error_messages['invalid_login'],
-        	            code='invalid_login',
-        	            params={'username':self.username_field.verbose_name},
-        	        )
+
             user = authenticate(username=username, password=password)
 
             if user is not None:
