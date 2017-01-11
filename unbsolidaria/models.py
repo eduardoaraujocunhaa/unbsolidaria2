@@ -14,6 +14,12 @@ class Organizacao(models.Model):
     cnpj = models.CharField(max_length=45, blank=True, null=True)
     organizacao_fk = models.IntegerField( default=-1 )
 
+    def __unicode__(self):
+        return self.cnpj
+
+    def __str__(self):
+        return self.cnpj
+
 class Voluntario(models.Model):
     GENRE_CHOICES = (
         ('m', 'Masculino'),
@@ -23,6 +29,12 @@ class Voluntario(models.Model):
     cpf = models.CharField(max_length=45, blank=True, null=True)
     sexo = models.CharField(max_length=1, blank=True, null=True, choices=GENRE_CHOICES)
     voluntario_fk = models.IntegerField( default=-1 )
+
+    def __unicode__(self):
+        return self.cpf
+
+    def __str__(self):
+        return self.cpf
 
 # Tabela de Noticias
 class Noticia(models.Model):
@@ -53,14 +65,14 @@ class FAQ(models.Model):
         return self.pergunta
 
 
-class Dia(models.Model):
-    descricao = models.CharField(max_length=20)
+# class Dia(models.Model):
+#     descricao = models.CharField(max_length=20)
 
-    def __unicode__(self):
-        return self.descricao
+#     def __unicode__(self):
+#         return self.descricao
 
-    def __str__(self):
-        return self.descricao
+#     def __str__(self):
+#         return self.descricao
 
 
 class Trabalho(models.Model):
@@ -71,7 +83,7 @@ class Trabalho(models.Model):
     data_inicio = models.DateField(auto_now=False, auto_now_add=False)
     data_fim = models.DateField(auto_now=False, auto_now_add=False)
     vagas = models.PositiveIntegerField(default=0)
-    dias = models.ManyToManyField(Dia)
+    # dias = models.ManyToManyField(Dia)
     organizacao = models.ForeignKey(User, related_name="dono")
     voluntarios = models.ManyToManyField(User, through='UsuarioTrabalho', through_fields=('trabalho', 'voluntario'))
 
@@ -94,14 +106,14 @@ class Endereco(models.Model):
         return self.cep
 
 
-class Tag(models.Model):
-    descricao = models.CharField(max_length=45)
+# class Tag(models.Model):
+#     descricao = models.CharField(max_length=45)
 
-    def __unicode__(self):
-        return self.descricao
+#     def __unicode__(self):
+#         return self.descricao
 
-    def __str__(self):
-        return self.descricao
+#     def __str__(self):
+#         return self.descricao
 
 class UsuarioTrabalho(models.Model):
     organizacao = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organizacao')
