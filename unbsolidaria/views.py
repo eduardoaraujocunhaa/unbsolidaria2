@@ -55,16 +55,16 @@ class OrganizacaoFormView(View):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user.set_password(password)
-            user.save()
             if org_form.is_valid():
-                org_user = org_form.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
-                org_user.organizacao_fk = user.id
-                org_user.save()
-            if endereco.is_valid():
-                end_user = endereco.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
-                end_user.usuario_fk = user.id
-                end_user.save()
-	    email = user.email
+            	if endereco.is_valid():
+          		user.save()
+        		org_user = org_form.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
+                	end_user = endereco.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
+        	        org_user.organizacao_fk = user.id
+               		end_user.usuario_fk = user.id
+	                org_user.save()
+	                end_user.save()
+
             # returna objeto se esta tudo certo com as credenciais
             user = authenticate(username=username, password=password)
 
@@ -105,17 +105,16 @@ class VoluntarioFormView(View):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user.set_password(password)
-            user.save()
-
             if vol_form.is_valid():
-                vol_user = vol_form.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
-                vol_user.voluntario_fk = user.id
-                vol_user.save()
+		if endereco.is_valid():
+			user.save()
+             		vol_user = vol_form.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
+                	end_user = endereco.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
+             		vol_user.voluntario_fk = user.id
+	                end_user.usuario_fk = user.id
+	                end_user.save()
+        	        vol_user.save()
 
-            if endereco.is_valid():
-                end_user = endereco.save(commit=False)  # cria um objeto, porem n coloca no banco ainda
-                end_user.usuario_fk = user.id
-                end_user.save()
             user = authenticate(username=username, password=password)
 
             if user is not None:
@@ -273,8 +272,8 @@ class TrabalhoCreate(LoginRequiredMixin, generic.CreateView):
             trab = trabalho.save(commit=False )  # cria um objeto, porem n coloca no banco ainda
             trab.organizacao_id = current_user.id	
             trab.save()
-
-	    return render(request, self.template_name, {'trabalho': trabalho})
+	    return redirect('/meusTrabalhos/')	
+	return render(request, self.template_name, {'trabalho': trabalho})
 
 
 class TrabalhoUpdate(LoginRequiredMixin, generic.UpdateView):

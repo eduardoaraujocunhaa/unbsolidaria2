@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from models import User, Organizacao, Voluntario, Trabalho, Endereco
 from django import forms
-from localflavor.br.forms import BRCPFField, BRCNPJField, BRPhoneNumberField
+from localflavor.br.forms import BRCPFField, BRCNPJField, BRPhoneNumberField, BRZipCodeField
 
 class ContactForm(forms.Form):
     INPUT_CLASS = 'form-control input-lg'
@@ -24,7 +24,7 @@ class UserForm(forms.ModelForm):
 
 
 class OrganizacaoForm(forms.ModelForm):
-
+    cnpj = BRCNPJField(required=True)
     class Meta:
         model = Organizacao
         fields = ['cnpj']
@@ -39,6 +39,7 @@ class VoluntarioForm(forms.ModelForm):
 
 
 class EnderecoForm(forms.ModelForm):
+    cep = BRZipCodeField(required=True)
     class Meta:
         model = Endereco
         fields = ['endereco', 'cep']
