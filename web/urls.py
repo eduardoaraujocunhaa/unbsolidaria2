@@ -28,7 +28,6 @@ urlpatterns = [
     url(r'', include("unbsolidaria.urls")),
     url(r'^admin/', admin.site.urls),
 
-    url(r'^report_builder/', include('report_builder.urls')),
     url(r'^admin_tools/', include('admin_tools.urls')),
 
     url(r'^', include(router.urls)),

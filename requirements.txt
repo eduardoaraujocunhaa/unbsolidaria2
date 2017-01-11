@@ -1,5 +1,4 @@
 Django==1.9
-django-report-builder==3.4.4
 djangorestframework==3.5.3
 et-xmlfile==1.0.1
 jdcal==1.3
