@@ -181,7 +181,7 @@
   }
 }
 
-#contact h1, #contact p, #registro h1, #registro p, #perguntas h1{
+#noticias h1, #contact h1, #contact p, #registro h1, #registro p, #perguntas h1{
     text-align: center;
     text-transform: uppercase;
     margin: 25px;
