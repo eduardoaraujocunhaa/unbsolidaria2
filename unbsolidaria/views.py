@@ -18,7 +18,6 @@ import django_filters
 
 # Create your views here.
 
-
 class IndexView(generic.ListView):
     template_name = '../templates/index.html'
     context_object_name = {}
@@ -65,6 +64,16 @@ class OrganizacaoFormView(View):
 	                org_user.save()
 	                end_user.save()
 
+  	    if '@' in username:
+		try:
+                	username = user.email
+	        except ObjectDoesNotExist:
+        		raise ValidationError(
+        	            self.error_messages['invalid_login'],
+        	            code='invalid_login',
+        	            params={'username':self.username_field.verbose_name},
+        	        )
+
             # returna objeto se esta tudo certo com as credenciais
             user = authenticate(username=username, password=password)
 
@@ -104,6 +113,7 @@ class VoluntarioFormView(View):
             user.tipo = 0
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+	    
             user.set_password(password)
             if vol_form.is_valid():
 		if endereco.is_valid():
@@ -114,7 +124,15 @@ class VoluntarioFormView(View):
 	                end_user.usuario_fk = user.id
 	                end_user.save()
         	        vol_user.save()
-
+  	    if '@' in username:
+		try:
+                	username = user.email
+	        except ObjectDoesNotExist:
+        		raise ValidationError(
+        	            self.error_messages['invalid_login'],
+        	            code='invalid_login',
+        	            params={'username':self.username_field.verbose_name},
+        	        )
             user = authenticate(username=username, password=password)
 
             if user is not None:

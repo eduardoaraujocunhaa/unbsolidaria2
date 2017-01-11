@@ -9,7 +9,8 @@ class User(AbstractUser):
     descricao = models.CharField(max_length=45, blank=True, null=True)
     telefone = models.CharField(max_length=45, blank=True, null=True)
     tipo = models.IntegerField( default=2 )
-
+    AbstractUser._meta.get_field('email')._unique = True
+ 
 class Organizacao(models.Model):
     cnpj = models.CharField(max_length=45, blank=True, null=True)
     organizacao_fk = models.IntegerField( default=-1 )
