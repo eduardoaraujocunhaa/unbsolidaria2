@@ -18,7 +18,6 @@ import django_filters
 
 # Create your views here.
 
-
 class IndexView(generic.ListView):
     template_name = '../templates/index.html'
     context_object_name = {}
@@ -104,6 +103,7 @@ class VoluntarioFormView(View):
             user.tipo = 0
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+	    
             user.set_password(password)
             if vol_form.is_valid():
 		if endereco.is_valid():

@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'unbsolidaria.User'
-
+AUTHENTICATION_BACKENDS = ['unbsolidaria.backends.EmailBackend']
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
