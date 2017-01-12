@@ -489,3 +489,21 @@ def set_user(request):
                 vol_obj.cpf = msg.get('cpf')
                 vol_onj.sexo = msg.get('sexo')
                 return JsonResponse({'response':'edited'})
+
+@csrf_exempt
+def edit_trabalho(request):
+    if request.method == 'PUT':
+        request = request.body
+        msg = json.loads(request)
+        titulo = msg.get('titulo')
+        trab = Trabalho.objects.get(titulo = titulo)
+
+        trab.titulo = msg.get('titulo')
+        trab.descricao = msg.get('descricao')
+        trab.autor = msg.get('autor')
+        trab.email = msg.get('email')
+        trab.data_inicio = msg.get('data_inicio')
+        trab.data_fim = msg.get('data_fim')
+        trab.vagas = msg.get('vagas')
+
+        return JsonResponse({'response':'edited'})
