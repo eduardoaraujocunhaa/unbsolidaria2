@@ -25,6 +25,13 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Noticia.objects.all()
 
+class AboutView(generic.ListView):
+    template_name = '../templates/about.html'
+    context_object_name = {}
+
+    def get_queryset(self):
+        return Noticia.objects.all()
+
 
 class OrganizacaoFormView(View):
     form_class = UserForm

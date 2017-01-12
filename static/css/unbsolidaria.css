@@ -6,7 +6,7 @@
     padding:0 !important;
 }
 
-#noticias, #perguntas, #registro, #login, #trabalho{
+#noticias, #perguntas, #registro, #login, #trabalho, #about{
     min-height: 100vh;
 }
 
@@ -181,11 +181,17 @@
   }
 }
 
-#contact h1, #contact p, #registro h1, #registro p, #perguntas h1{
+#noticias h1, #contact h1, #contact p, #registro h1, #registro p, #perguntas h1, #about h1{
     text-align: center;
     text-transform: uppercase;
     margin: 25px;
     color: #3a506b;
+}
+
+
+#about p{
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .post-heading{
@@ -347,17 +353,6 @@
   padding: 10px;
 }
 
-input[type="text"] {
-  margin-bottom: 0px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-input[type="password"] {
-  margin-bottom: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
 
 .colorgraph {
   height: 7px;
@@ -391,4 +386,30 @@ input[type="password"] {
 .descricao{
   width: 800px;
   margin: 20px;
+}
+
+
+#top-bt {
+  visibility: hidden;
+}
+
+.button-top {
+    position: fixed;
+    top: 220px;
+    right: -3px;
+    width: 45px;
+    height: 50px;
+    background-color: #e67e22;
+    border: 1px solid #e67e22;
+    z-index: 3000;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+}
+
+.button-top i {
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    color: #fff;
 }

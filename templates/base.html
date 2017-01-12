@@ -87,6 +87,9 @@
             <ul class="nav navbar-nav" id="navigation">
         {% if user.is_authenticated == False%}
           <li>
+            <a href="{% url 'about' %}">Sobre Nós</a>
+          </li>
+          <li>
             <a href="{% url 'noticias' %}">Notícias</a>
           </li>
           <li>
@@ -107,15 +110,18 @@
           </li>
         {% endif %}
             {% if user.is_authenticated == True%}
-                <li>
-                      <a href="{% url 'contato' %}">Contato</a>
-                </li>
-                <li>
-                     <a href="{% url 'noticias' %}">Notícias</a>
-                 </li>
-                 <li>
-                     <a href="{% url 'faq' %}">FAQ</a>
-                </li>
+              <li>
+                <a href="{% url 'about' %}">Sobre Nós</a>
+              </li>
+              <li>
+                <a href="{% url 'noticias' %}">Notícias</a>
+              </li>
+              <li>
+                <a href="{% url 'faq' %}">FAQ</a>
+              </li>
+              <li>
+                <a href="{% url 'contato' %}">Contato</a>
+              </li>
                  <li>
                     <a href="{% url 'lista-trabalhos' %}">Trabalhos</a>
                 </li>
