@@ -466,7 +466,7 @@ def set_user(request):
         user.save()
 
         if msg.get('tipo') == 1:
-            org_form = OrganizacaoForm()
+            org_form = OrganizacaoForm().save(commit=False)
             org_form.organizacao_fk = user.id
             org_form.cnpj = msg.get('cnpj')
             org_form.save()
