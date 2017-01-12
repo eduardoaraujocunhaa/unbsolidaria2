@@ -466,15 +466,26 @@ def set_user(request):
         user.save()
 
         if msg.get('tipo') == 1:
-            org_form = OrganizacaoForm().save(commit=False)
-            org_form.organizacao_fk = user.id
-            org_form.cnpj = msg.get('cnpj')
-            org_form.save()
-            return JsonResponse({'response': 'ok'})
+            org_obj = Organizacao.objects.filter(organizacao_fk = user.id).first()
+            if org_obj is None:
+                org_form = OrganizacaoForm().save(commit=False)
+                org_form.organizacao_fk = user.id
+                org_form.cnpj = msg.get('cnpj')
+                org_form.save()
+                return JsonResponse({'response': 'ok'})
+            else:
+                org_obj.cnpj = msg.get('cnpj')
+                return JsonResponse({'response': 'edited'})
         else:
-            vol_form = VoluntarioForm().save(commit=False)
-            vol_form.voluntario_fk = user.id
-            vol_form.cpf = msg.get('cpf')
-            vol_form.sexo = msg.get('sexo')
-            vol_form.save()
-            return JsonResponse({'response':'ok'})
+            vol_obj = Voluntario.objects.filter(voluntario_fk = user.id).first()
+            if vol_obj is None:
+                vol_form = VoluntarioForm().save(commit=False)
+                vol_form.voluntario_fk = user.id
+                vol_form.cpf = msg.get('cpf')
+                vol_form.sexo = msg.get('sexo')
+                vol_form.save()
+                return JsonResponse({'response':'ok'})
+            else:
+                vol_obj.cpf = msg.get('cpf')
+                vol_onj.sexo = msg.get('sexo')
+                return JsonResponse({'response':'edited'})
