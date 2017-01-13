@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+    <div id="registro">
+    <div class="container">
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <h1>Lista de Usuários</h1>
+            <hr class="head-border-grey">
+        </div>
+        
+        
+        <table class="tabela_trabalho">
+            <tr>
+                <th>Username</th>
+                <th>Primeiro Nome</th>
+                <th>Último Nome</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Sexo</th>
+                <th>Data do Cadastro</th>
+                <th>CPF/CNPJ</th>
+                <th>Telefone</th>
+            </tr>
+            {% for obj in users %}
+            <tr>
+                <td>{{ obj.username }}</td>
+                {% if obj.tipo == 2 %}
+                    <td>---------</td>
+                    <td>---------</td>
+                {% else %}
+                    <td>{{ obj.first_name }}</td>
+                    <td>{{ obj.last_name }}</td>
+                {% endif %}
+                <td>{{ obj.email }}</td>
+                {% if obj.tipo == 0 %}
+                    <td>Voluntário</td>
+                {% elif obj.tipo == 1 %}
+                    <td>Organização</td>    
+                {% else %}
+                    <td>Administrador</td>
+                {% endif %}
+                {% if obj.tipo == 1 or obj.tipo == 2 %}
+                    <td>---------</td>
+                {% elif obj.sexo == 'm' %}
+                    <td>Homem</td>    
+                {% else %}
+                    <td>Mulher</td>    
+                {% endif %}    
+                <td>{{ obj.date_joined }}</td>
+                {% if obj.tipo == 2 %}
+                    <td>---------</td>
+                {% elif obj.tipo == 0 %}
+                    <td>{{ obj.cpf }}</td>
+                {% else %}
+                    <td>{{ obj.cnpj }}</td>
+                {% endif %}
+                {% if obj.tipo == 2 %}
+                    <td>---------</td>
+                {% else %}
+                    <td>{{ obj.telefone }}</td>      
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+</div>
+</body>
+</html>

@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^get_user/$', views.get_user, name="get_user"),
     url(r'^set_user/$', views.set_user, name="set_user"),
     url(r'^edit_trabalho/$', views.edit_trabalho, name="edit_trabalho"),
+    # url(r'^show_trabalho/$', views.show_trabalho, name="show_trabalho"),
 
     url(r'^listaTrabalhos/$', views.TrabalhosView.as_view(), name="lista-trabalhos"),
     url(r'^meusTrabalhos/$', views.MeusTrabalhosView.as_view(), name="meus-trabalhos"),
@@ -36,7 +37,9 @@ urlpatterns = [
     url(r'^filtros/user$', views.user_filters),
     url(r'^filtros/trab$', views.trabalho_filters),
     url(r'^filtros/trab_user$', views.trab_user_filters),
-
+    url(r'^filtros/pdf_trab.pdf$', views.Pdf_trab.as_view(), name='pdf_trab'),
+    url(r'^filtros/pdf_user.pdf$', views.Pdf_user.as_view(), name='pdf_user'),
+    url(r'^filtros/pdf_trab_user.pdf$', views.Pdf_trab_user.as_view(), name='pdf_trab_user'),
 
     url(r'^sobrenos/$', views.AboutView.as_view(), name="about"),
 ]

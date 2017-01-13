@@ -517,3 +517,40 @@ def edit_trabalho(request):
         trab.vagas = msg.get('vagas')
 
         return JsonResponse({'response':'edited'})
+
+
+from easy_pdf.views import PDFTemplateView
+
+class Pdf_trab(PDFTemplateView):
+    template_name = "filtros/pdf_trab.html"
+
+    def get_context_data(self, **kwargs):
+        kwargs = {'trabs': Trabalho.objects.all()}
+        return super(Pdf_trab, self).get_context_data(
+            pagesize="A4",
+            title="Trabalhos",
+            **kwargs
+        )
+    
+class Pdf_user(PDFTemplateView):
+    template_name = "filtros/pdf_user.html"
+
+    def get_context_data(self, **kwargs):
+        kwargs = {'users': User.objects.all()}
+        return super(Pdf_user, self).get_context_data(
+            pagesize="A4",
+            title="Users",
+            **kwargs
+        )
+
+    
+class Pdf_trab_user(PDFTemplateView):
+    template_name = "filtros/pdf_trab_user.html"
+
+    def get_context_data(self, **kwargs):
+        kwargs = {'trabs': Trabalho.objects.all(), 'users': User.objects.all(), 'trab_user': UsuarioTrabalho.objects.all()}
+        return super(Pdf_trab_user, self).get_context_data(
+            pagesize="A4",
+            title="Rel Trab/User",
+            **kwargs
+        )

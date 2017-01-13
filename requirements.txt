@@ -11,3 +11,9 @@ django-filter
 django-allauth
 django-rest-auth
 django-localflavor
+django-easy-pdf
+html5lib==1.0b8
+xhtml2pdf
+Pillow
+reportlab>=2.7,<3
+django-xhtml2pdf
