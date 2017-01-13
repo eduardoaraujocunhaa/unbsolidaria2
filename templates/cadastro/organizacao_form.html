@@ -1,17 +1,16 @@
 {% extends '../templates/base.html' %}
 {% block content %}
 
-<div class="container-fluid">
 
     <div id="registro">
         <div class="container">
-        
+
                     <h1>Criar nova conta</h1>
-                     <hr class="head-border-grey">
+                     <hr class="colorgraph">
                 {% if error_message %}
                     <p><strong>{{ error_message }}</strong></p>
                 {% endif %}
-                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" style="margin-top:60px">
                     {% csrf_token %}
                     {% include '../templates/cadastro/organizacao_form_template.html' %}
                      <div class="form-group">
@@ -23,5 +22,4 @@
         </div>
     </div>
 
-</div>
 {% endblock content %}
