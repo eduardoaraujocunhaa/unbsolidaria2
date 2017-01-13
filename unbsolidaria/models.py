@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.db.models import F
 
 # Create your models here.
 # Tabela de extend do User
@@ -93,6 +93,10 @@ class Trabalho(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def decrement_vagas(self):
+        self.vagas = F('vagas')-1
+        self.save()
 
 
 class Endereco(models.Model):
