@@ -3653,7 +3653,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
   width: 100%;
 }
 .navbar:before,
