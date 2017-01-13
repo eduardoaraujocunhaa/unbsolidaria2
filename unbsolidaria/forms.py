@@ -16,7 +16,7 @@ class ContactForm(forms.Form):
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
-    telefone = BRPhoneNumberField(required=True,widget=None)
+    telefone = BRPhoneNumberField(required=True, widget=forms.TextInput(attrs={'data-mask': '(00)00000-0000', 'class': '.phone', 'placeholder':'(__)_____-____'}))
 
     class Meta:
         model = User
@@ -24,14 +24,14 @@ class UserForm(forms.ModelForm):
 
 
 class OrganizacaoForm(forms.ModelForm):
-    cnpj = BRCNPJField(required=True)
+    cnpj = BRCNPJField(required=True, widget=forms.TextInput(attrs={'placeholder':'__.___.___/____-__'}))
     class Meta:
         model = Organizacao
         fields = ['cnpj']
 
 
 class VoluntarioForm(forms.ModelForm):
-    cpf = BRCPFField(required=True)
+    cpf = BRCPFField(required=True, widget=forms.TextInput(attrs={'placeholder':'___.___.___.___-__'}))
 
     class Meta:
         model = Voluntario
@@ -39,7 +39,7 @@ class VoluntarioForm(forms.ModelForm):
 
 
 class EnderecoForm(forms.ModelForm):
-    cep = BRZipCodeField(required=True)
+    cep = BRZipCodeField(required=True, widget=forms.TextInput(attrs={'placeholder':'______-___'}))
     class Meta:
         model = Endereco
         fields = ['endereco', 'cep']
