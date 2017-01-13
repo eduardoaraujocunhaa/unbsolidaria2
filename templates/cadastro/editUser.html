@@ -1,27 +1,21 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
-<div id="trabalho">
-<div class = "panel panel-primary">
-   	<div class = "panel-heading">
-    <h4 class = "panel-title">Editar Informações Pessoais</h4>
-  	</div>
+<div id="trabalho" class="container">
+  <div class="row page-title text-center wow bounce"  data-wow-delay="1s">
+    <h2>Editar Perfil</h2>
+  </div>
+
    		<div id="trabalhos" class = "panel-body">
 		<div class = "list-group">
-  			<a href = "#" class = "list-group-item active">
-     			<h3 class = "panel-title">{{user.first_name}} {{user.last_name}}</h3>
-			</a>
-
+     	<h3 class = "panel-title">{{user.first_name}} {{user.last_name}}</h3>
       <div href = "#" class = "list-group-item">
-      <hr class="head-border">
-      <center>
-			<form action="" method="post">{% csrf_token %}
-			   <div class="control-label col-sm-2">
-    			{{ form.as_p }} 
-         </div>
-    			<input class = "btn btn-primary btn-sm" type="submit" value="Atualizar" />
-    			
-    		</center>
+        <hr class="head-border">
+			  <form action="" method="post">{% csrf_token %}
+			     <div class="control-label col-sm-6">
+    			 {{form}} 
+           </div>
+    			 <input class = "btn btn-primary btn-sm" type="submit" value="Atualizar" />
         </form>
 		</div>
 </div>
