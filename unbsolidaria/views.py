@@ -236,7 +236,8 @@ class TrabalhosView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5	
 
     def get_queryset(self):
-        return Trabalho.objects.all()
+        user = self.request.user
+        return Trabalho.objects.exclude(voluntarios=user)
 
 
 class MeusTrabalhosView(LoginRequiredMixin, generic.ListView):
@@ -333,7 +334,9 @@ class TrabalhoUsuarioCreate(generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super(TrabalhoUsuarioCreate, self).get_context_data(**kwargs)
         teste = self.kwargs['pk']
-        context['trabalho'] = Trabalho.objects.get(pk=teste)
+        t = Trabalho.objects.get(pk=teste)
+        t.decrement_vagas()
+        context['trabalho'] = t
         return context
 
 

@@ -40,7 +40,7 @@
      	{% endif %}
     {% endif %}
 
-     {% if user.tipo == 0%}
+     {% if user.tipo == 0 and user not in object.voluntarios.all and object.vagas > 0 %}
      <a href="{% url 'entrar-trabalho' object.id %}"><input type="button" class = "btn btn-primary btn-sm" value="Inscreva-se"></a>
      {% endif %}
      <a href="{% url 'lista-voluntarios' object.id %}"><input type="button" class = "btn btn-primary btn-sm" value="Voluntarios"></a>
