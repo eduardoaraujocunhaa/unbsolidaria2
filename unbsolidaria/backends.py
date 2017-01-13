@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-
+from models import User
 class EmailBackend(object):
     def authenticate(self, username=None, password=None):
         if '@' in username:
