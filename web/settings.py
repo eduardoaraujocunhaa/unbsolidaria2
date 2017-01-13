@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'localflavor',
-    'easy_pdf'
+    'easy_pdf',
+    'input_mask',
 ]
 
 SITE_ID = 1
