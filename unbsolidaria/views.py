@@ -415,7 +415,7 @@ def trabalho_filters(request):
     return render(request, 'filtros/trab.html', {'filter': g})
 
 from rest_framework import viewsets
-from unbsolidaria.serializers import UserSerializer, TrabalhoSerializer, NoticiaSerializer
+from unbsolidaria.serializers import UserSerializer, TrabalhoSerializer, NoticiaSerializer, UsuarioTrabalhoSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -438,6 +438,13 @@ class NoticiaViewSet(viewsets.ModelViewSet):
     """
     queryset = Noticia.objects.all()
     serializer_class = NoticiaSerializer
+
+class UsuarioTrabalhoViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = UsuarioTrabalho.objects.all()
+    serializer_class = UsuarioTrabalhoSerializer
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt

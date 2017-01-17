@@ -23,6 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'trabalhos', views.TrabalhoViewSet)
 router.register(r'news', views.NoticiaViewSet)
+router.register(r'user-trab', views.UsuarioTrabalhoViewSet)
 
 urlpatterns = [
     url(r'', include("unbsolidaria.urls")),

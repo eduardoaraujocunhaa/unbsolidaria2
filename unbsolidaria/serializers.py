@@ -1,4 +1,4 @@
-from .models import User, Trabalho, Noticia
+from .models import User, Trabalho, Noticia, UsuarioTrabalho
 from rest_framework import serializers
 
 
@@ -16,3 +16,8 @@ class NoticiaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Noticia
         fields = ('id', 'titulo', 'subtitulo', 'texto', 'dataCadastro', 'dataNoticia')
+
+class UsuarioTrabalhoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+	    model = UsuarioTrabalho
+	    fields = ('organizacao', 'voluntario', 'trabalho')
