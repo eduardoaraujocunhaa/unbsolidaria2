@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'localflavor',
     'easy_pdf',
-    'input_mask',
 ]
 
 SITE_ID = 1
