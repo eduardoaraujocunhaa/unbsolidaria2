@@ -167,6 +167,9 @@ class PerfilUsuarioView(LoginRequiredMixin, generic.DetailView):
         return context
 
 #######################################################################################
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
+
 def contato(request):
     if request.method == 'GET':
         form = ContactForm()
@@ -177,8 +180,21 @@ def contato(request):
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email,
-                          ['unbsolidariadesenv@gmail.com'])
+                template = get_template('contact_template.txt')
+                content = template.render({
+                    'subject': subject,
+                    'from_email': from_email,
+                    'message': message,
+                })
+
+                email = EmailMessage(
+                    "Nova Mensagem Recebida",
+                    content,
+                    "UnBSolidaria" +'',
+                    ['unbsolidariadesenv@gmail.com'],
+                    headers = {'Reply-To': from_email }
+                )
+                email.send()
                 form = ContactForm()
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')

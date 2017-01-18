@@ -1,0 +1,8 @@
+Assunto:
+{{ subject }}
+
+Email do Remetente:
+{{ from_email }}
+
+Mensagem:
+{{ message|safe|striptags }}
