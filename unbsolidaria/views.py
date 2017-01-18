@@ -525,6 +525,32 @@ def edit_trabalho(request):
 
         return JsonResponse({'response':'edited'})
 
+from django.test.client import RequestFactory
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
+
+@csrf_exempt
+def show_trabs(request):
+    if request.method == 'GET':
+        request = request.body
+        msg = json.loads(request)
+        org = msg.get('organizacao')
+        trabs = Trabalho.objects.filter(organizacao = org)
+        context = dict(request = RequestFactory().get('/'))
+
+        serializer = TrabalhoSerializer(trabs, many=True, context=context)
+        return JSONResponse(serializer.data)
+
+
 
 from easy_pdf.views import PDFTemplateView
 

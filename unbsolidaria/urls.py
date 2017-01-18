@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^get_user/$', views.get_user, name="get_user"),
     url(r'^set_user/$', views.set_user, name="set_user"),
     url(r'^edit_trabalho/$', views.edit_trabalho, name="edit_trabalho"),
-    # url(r'^show_trabalho/$', views.show_trabalho, name="show_trabalho"),
+    url(r'^show_trabs/$', views.show_trabs, name="show_trabs"),
 
     url(r'^listaTrabalhos/$', views.TrabalhosView.as_view(), name="lista-trabalhos"),
     url(r'^meusTrabalhos/$', views.MeusTrabalhosView.as_view(), name="meus-trabalhos"),
