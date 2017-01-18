@@ -541,13 +541,14 @@ class JSONResponse(HttpResponse):
 @csrf_exempt
 def show_trabs(request):
     if request.method == 'GET':
-        request = request.body
-        msg = json.loads(request)
+        body = request.body
+        msg = json.loads(body)
         org = msg.get('organizacao')
         trabs = Trabalho.objects.filter(organizacao = org)
-        context = dict(request = RequestFactory().get('/'))
+        # context = dict(request = RequestFactory().get('/'))
 
-        serializer = TrabalhoSerializer(trabs, many=True, context=context)
+        # serializer = TrabalhoSerializer(trabs, many=True, context=context)
+        serializer = TrabalhoSerializer(trabs, many=True, context={'request': request})
         return JSONResponse(serializer.data)
 
 
