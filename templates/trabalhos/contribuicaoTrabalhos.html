@@ -3,18 +3,12 @@
 {% block content %}
 
 <!-- Trabalhos voluntário -->
+<div id="trabalho" class="container">
+  <div class="row page-title text-center wow bounce"  data-wow-delay="1s">
+      <h2>Minhas contribuições</h2>
+  </div>
 
-<div id="trabalho">
-  
-
-<div class = "panel panel-primary">
-   <div class = "panel-heading">
-      <h4 class = "panel-title">Trabalhos Voluntários</h4>
-   </div>
-   <div id="trabalhos" class = "panel-body">
-
-    <div class = "list-group">
-      <a href = "#" class = "list-group-item active"><h3 class = "panel-title"> Minhas contribuições </h3></a>  
+    <div class = "list-group">  
 
   {% for contribuicao in contribuicao_trabalhos %}
     {% if user.id == contribuicao.voluntario_id %}
