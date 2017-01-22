@@ -556,7 +556,7 @@ class JSONResponse(HttpResponse):
 
 @csrf_exempt
 def show_trabs(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         body = request.body
         msg = json.loads(body)
         org = msg.get('organizacao')
