@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView, DeleteView
-from .models import Noticia, FAQ, Trabalho, User, Organizacao, Voluntario, Endereco
+from .models import Noticia, FAQ, Trabalho, User, Organizacao, Voluntario, Endereco, Feedback
 from django.core.mail import send_mail
 from django.http import BadHeaderError
 from django.http import HttpResponse
@@ -9,12 +9,13 @@ from django.shortcuts import render_to_response
 from .models import Noticia, FAQ,  UsuarioTrabalho
 from django.template import RequestContext
 from django.views import generic
-from .forms import ContactForm, UserForm, OrganizacaoForm, VoluntarioForm, EnderecoForm, TrabalhoForm
+from .forms import ContactForm, UserForm, OrganizacaoForm, VoluntarioForm, EnderecoForm, TrabalhoForm, FeedBackForm
 from django.views.generic import View
 from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.core.urlresolvers import reverse_lazy
 import django_filters
+import datetime
 
 # Create your views here.
 
@@ -275,7 +276,12 @@ class MeusTrabalhosView(LoginRequiredMixin, generic.ListView):
 
 
 def ContribuicaoTrabalhosView(request):
-        return render_to_response('trabalhos/contribuicaoTrabalhos.html', {'contribuicao_trabalhos': UsuarioTrabalho.objects.all(), 'lista_trabalhos': Trabalho.objects.all() }, context_instance=RequestContext(request))
+        return render_to_response('trabalhos/contribuicaoTrabalhos.html', 
+            {'contribuicao_trabalhos': UsuarioTrabalho.objects.all(), 
+            'lista_trabalhos': Trabalho.objects.all(),
+            'trabalhos_feedback' : Feedback.objects.filter(voluntario_id=request.user.id).values_list("trabalho", flat=True),
+            'now': datetime.datetime.now() }, 
+            context_instance=RequestContext(request))
 
 
 class TrabalhoCreate(LoginRequiredMixin, generic.CreateView):
@@ -384,6 +390,41 @@ class TrabalhoUsuarioView(LoginRequiredMixin, generic.ListView):
         teste = self.kwargs['pk']
         print teste
         return UsuarioTrabalho.objects.all().filter(trabalho_id=teste)
+
+class FeedBackTrabalho(LoginRequiredMixin, generic.CreateView):
+    feedback_class = FeedBackForm
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+    template_name = '../templates/trabalhos/feedback/criarFeedback.html'
+    success_url = '/contribuicaoTrabalhos'
+
+    def get(self, request, **kwargs):
+        if request.user.tipo == 0:
+            id_trabalho = self.kwargs['pk']
+            f = Feedback.objects.filter(trabalho_id=id_trabalho,voluntario_id=request.user.id).first()
+            feedback = self.feedback_class(initial={'titulo': f.titulo, 'descricao': f.descricao})
+            t = Trabalho.objects.get(pk=id_trabalho)
+            return render(request, self.template_name, {'trabalho': t, 'feedback': feedback})
+        else:
+            return redirect('/meusTrabalhos')
+
+    def post(self, request, **kwargs):
+        id_trabalho = self.kwargs['pk']
+        current_user = request.user
+        feedback = self.feedback_class(request.POST)
+        t = Trabalho.objects.get(pk=id_trabalho)
+        if feedback.is_valid():
+            feed = Feedback.objects.filter(trabalho_id=id_trabalho,voluntario_id=request.user.id).first()
+            if feed is None:
+                feed = feedback.save(commit=False)
+            feed.voluntario_id = current_user.id
+            feed.trabalho_id = id_trabalho
+            feed.titulo = feedback.cleaned_data['titulo']
+            feed.descricao = feedback.cleaned_data['descricao']
+            feed.data = datetime.datetime.now()
+            feed.save()
+            return redirect('/contribuicaoTrabalhos')  
+        return render(request, self.template_name, {'feedback': feedback, 'trabalho': t})
 
 ################################################################################
 
