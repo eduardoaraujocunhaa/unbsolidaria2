@@ -124,3 +124,17 @@ class UsuarioTrabalho(models.Model):
     organizacao = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organizacao')
     voluntario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='voluntario')
     trabalho = models.ForeignKey(Trabalho, on_delete=models.CASCADE)
+
+
+class Feedback(models.Model):
+    titulo = models.CharField(max_length=45)
+    descricao = models.TextField(max_length=140)
+    data = models.DateField(auto_now=False, auto_now_add=False)
+    voluntario = models.ForeignKey(User, related_name='usuario')
+    trabalho = models.ForeignKey(Trabalho, on_delete=models.CASCADE, related_name='trabalho')
+
+    def __unicode__(self):
+        return self.titulo
+
+    def __str__(self):
+        return self.titulo

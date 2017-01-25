@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^editarTrabalho/(?P<pk>\d+)/$', views.TrabalhoUpdate.as_view(), name="editar-trabalho"),
     url(r'^deletarTrabalho/(?P<pk>\d+)/$', views.TrabalhoDelete.as_view(), name="deletar-trabalho"),
     url(r'^visualizarTrabalho/(?P<pk>\d+)/$', views.TrabalhoDetailView.as_view(), name='visualizar-trabalho'),
+    
+    url(r'^feedbackTrabalho/(?P<pk>\d+)/$', views.FeedBackTrabalho.as_view(success_url='/contribuicoesTrabalho'), name="feedback"),
 
     url(r'^entrarTrabalho/(?P<pk>\d+)/$', views.TrabalhoUsuarioCreate.as_view(), name='entrar-trabalho'),
     url(r'^listaVoluntarios/(?P<pk>\d+)/$', views.TrabalhoUsuarioView.as_view(), name='lista-voluntarios'),

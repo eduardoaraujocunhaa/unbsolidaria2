@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from models import User, Organizacao, Voluntario, Trabalho, Endereco
+from models import User, Organizacao, Voluntario, Trabalho, Endereco, Feedback
 from django import forms
 from localflavor.br.forms import BRCPFField, BRCNPJField, BRPhoneNumberField, BRZipCodeField
 
@@ -50,3 +50,8 @@ class TrabalhoForm(forms.ModelForm):
         model = Trabalho
  	fields = ['titulo', 'descricao', 'autor', 'email', 'vagas', 'data_inicio', 'data_fim']
 
+
+class FeedBackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['titulo', 'descricao']

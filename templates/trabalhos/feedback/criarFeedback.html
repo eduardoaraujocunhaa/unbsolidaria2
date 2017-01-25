@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div id="trabalho" class="container">
+    <div class="row page-title text-center wow bounce"  data-wow-delay="1s">
+      <h2>Feedback Trabalho: {{ trabalho.titulo }}</h2>
+
+    </div>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in feedback %}
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-6">
+                    <span class="text-danger small">{{ field.errors }}</span>
+                </div>
+                <label class="control-label col-sm-offset-2 col-sm-4">{{ field.label_tag }}</label>
+                <div class="col-sm-6">{{ field }}</div>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-6">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </div>
+    </form>            
+</div>
+{% endblock content %}

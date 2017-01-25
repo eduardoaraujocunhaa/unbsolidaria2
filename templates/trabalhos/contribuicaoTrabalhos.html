@@ -19,11 +19,22 @@
         <h4 class = "list-group-item-heading">
         <!-- <img width="64px" height="64px" src = {{trabalho.image}}.url alt = "Generic placeholder image">-->
               {{trabalho.titulo}}  
-        </h4> 
+        </h4>
+         
       <hr class="head-border">
-      
+          Data Final: {{trabalho.data_fim}} 
+          {% if now.date > trabalho.data_fim %}
+           - Trabalho Finalizado 
+          {% endif %}
         <p>Descrição: {{trabalho.descricao}}</p>
         <a href="/visualizarTrabalho/{{trabalho.id}}"><button class = "btn btn-primary btn-sm">Visualizar Trabalho</button></a>
+        {% if now.date > trabalho.data_fim %}
+          {% if trabalho.id in trabalhos_feedback %}
+            <a href="/feedbackTrabalho/{{trabalho.id}}"><button class = "btn btn-primary btn-sm">Editar Feedback</button></a>
+          {% else %}
+            <a href="/feedbackTrabalho/{{trabalho.id}}"><button class = "btn btn-primary btn-sm">Postar Feedback</button></a>
+          {% endif %}
+        {% endif %}
       </div>
       {% endif %}
       {% endfor %}
